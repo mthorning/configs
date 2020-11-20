@@ -66,6 +66,7 @@ fi
 # for running cypress GUI
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 /etc/init.d/dbus start &> /dev/null
+sudo /etc/init.d/dbus start &> /dev/null
 
 dev() {
     nodemon --exec "babel src --root-mode upward --out-dir dist --ignore '**/*.spec.js' && rsync -av --include='*.scss' --include='*.less'  --include='*.json' --exclude='*' src/ dist/ && yalc publish . --push" --verbose ./src --ignore dist
