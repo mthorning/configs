@@ -52,11 +52,6 @@ sshadd() {
 
 export PATH="$PATH:/home/mthorning/.cargo/bin"
 
-if [ -f ~/.backup-status ]; then
-    cat ~/.backup-status
-    rm ~/.backup-status
-fi
-
 # set DISPLAY variable to the IP automatically assigned to WSL2
 # for running cypress GUI
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
