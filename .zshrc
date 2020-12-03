@@ -50,11 +50,6 @@ sshadd() {
     ssh-add ~/.ssh/$1
 }
 
-photoup() {
-    rsync -av --progress --delete ~/code/photography/photo-gallery vps:~/websites
-    ssh vps docker restart photo
-}
-
 export PATH="$PATH:/home/mthorning/.cargo/bin"
 
 if [ -f ~/.backup-status ]; then
