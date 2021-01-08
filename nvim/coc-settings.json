@@ -8,6 +8,10 @@
       "command": "reason-language-server",
       "filetypes": ["reason"]
     },
+    "eslint": {
+        "run": "onSave",
+        "autoFixOnSave": true
+    },
     "svelte.plugin.typescript.enable": false,
     "prettier.onlyUseLocalVersion": false,
     "coc.preferences.formatOnSaveFiletypes": ["css", "javascript", "svelte", "javascriptreact", "markdown"]

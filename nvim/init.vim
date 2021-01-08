@@ -34,13 +34,25 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 set spelllang=en
 set shiftwidth=4
 set number relativenumber
-set mouse=a
 set splitbelow splitright
 set hidden
 set scrolloff=5
 set nopaste
 set expandtab
 au FileType gitcommit 1 | startinsert
+
+let g:clipboard = {
+\   'name': 'WslClipboard',
+\   'copy': {
+\      '+': 'clip.exe',
+\      '*': 'clip.exe',
+\    },
+\   'paste': {
+\      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+\      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+\   },
+\   'cache_enabled': 0,
+\ }
 
 "Plugins
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
