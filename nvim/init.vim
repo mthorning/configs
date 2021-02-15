@@ -1,6 +1,8 @@
 "                      _
 
 
+
+
 "               \ \ / / | '_ ` _ \| '__/ __|
 "                \ V /| | | | | | | | | (__
 "               (_)_/ |_|_| |_| |_|_|  \___|
@@ -52,6 +54,17 @@ let g:clipboard = {
 \   },
 \   'cache_enabled': 0,
 \ }
+  \   'name': 'WslClipboard',
+  \   'copy': {
+  \      '+': 'clip.exe',
+  \      '*': 'clip.exe',
+  \    },
+  \   'paste': {
+  \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \   },
+  \   'cache_enabled': 0,
+  \ }
 
 "Plugins
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -94,6 +107,7 @@ Plug 'psliwka/vim-smoothie'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'amiralies/vim-rescript'
+Plug 'brooth/far.vim'
 
 call plug#end()
 
@@ -162,4 +176,3 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*:
 set viminfo='100,n$HOME/.vim/files/info/viminfo
-
