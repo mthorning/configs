@@ -4,6 +4,8 @@
 
 
 
+
+
 "               \ \ / / | '_ ` _ \| '__/ __|
 "                \ V /| | | | | | | | | (__
 "               (_)_/ |_|_| |_| |_|_|  \___|
@@ -27,8 +29,22 @@ map <leader>a :wa<CR>
 map <leader># :b#<CR>
 map <leader>j :%!python -m json.tool<CR>
 map <leader>t :vsp term://zsh<CR>
+
 map <leader>s :mks! ~/current-session.vim<CR>
 map <leader>cd :lcd %:h<CR>
+
+set mouse=a
+
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 inoremap <C-p> <Nop>
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -99,6 +115,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'amiralies/vim-rescript'
 Plug 'brooth/far.vim'
+Plug 'fatih/vim-go'
 Plug 'andymass/vim-matchup'
 
 call plug#end()
@@ -145,17 +162,39 @@ let g:lightline = {
             \       'colorscheme': 'darcula',
             \        'active': {
             \         'left': [ [ 'mode', 'paste' ],
-            \             [ 'readonly', 'foldername', 'filename', 'modified' ] ]
+            \             [ 'readonly', 'cwd', 'filename', 'modified' ] ]
             \        },
             \        'component_function': {
-            \            'foldername': 'FolderForLightline'
+            \            'cwd': 'Cwd',
+            \            'filename': 'FilenameForLightline',
             \        },
             \    }
+let g:lightline = {
+      \ 'mode_map': {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'VL',
+        \ "\<C-v>": 'VB',
+        \ 'c' : 'C',
+        \ 's' : 'S',
+        \ 'S' : 'SL',
+        \ "\<C-s>": 'SB',
+        \ 't': 'T',
+        \ },
+      \ }
 
-function! FolderForLightline()
-    let path = split(expand('%:p:h'), '/')
-    return path[-1]
+function! FilenameForLightline()
+    return expand('%:h')
 endfunction
+function! Cwd()
+    return getcwd()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 set laststatus=2 "for the status bar to work
 
 syntax enable
