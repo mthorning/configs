@@ -25,6 +25,7 @@ alias glog="git log --oneline"
 alias se=sudoedit
 alias lastvim='nvim -S ~/current-session.vim'
 alias lg="lazygit"
+alias npmi="npm install"
 
 # function chpwd() {
 #     emulate -L zsh
@@ -43,10 +44,6 @@ fi
 if command -v most > /dev/null 2>&1; then
     export PAGER="most"
 fi
-
-npmi() {
-    npm install $1
-}
 
 sshadd() {
     eval $(ssh-agent)
