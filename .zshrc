@@ -25,6 +25,7 @@ alias glog="git log --oneline"
 alias se=sudoedit
 alias lastvim='nvim -S ~/current-session.vim'
 alias lg="lazygit"
+alias npmi="npm i"
 
 # function chpwd() {
 #     emulate -L zsh
